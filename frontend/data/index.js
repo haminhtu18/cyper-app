@@ -362,22 +362,236 @@ export const NavbarLinks = [
         ],
       },
       {
-        Head: "New For Kids",
+        Head: "Jordan",
         sublink: [
           {
-            name: "shoes",
+            name: "All Jordan",
             link: "/",
           },
           {
-            name: "clothings",
+            name: "New Jordan",
             link: "/",
           },
           {
-            name: "accessories",
+            name: "Jordan Shoes",
             link: "/",
           },
           {
-            name: "shop all new",
+            name: "Jordan Clothing",
+            link: "/",
+          },
+          {
+            name: "Jordan Basketball",
+            link: "/",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: "Women",
+    submenu: true,
+    link: "/",
+    sublinks: [
+      {
+        Head: "Featured",
+        sublink: [
+          {
+            name: "New Releases",
+            link: "/",
+          },
+          {
+            name: "Bestsellers",
+            link: "/",
+          },
+          {
+            name: "Jordan",
+            link: "/",
+          },
+          {
+            name: "Sale",
+            link: "/",
+          },
+        ],
+      },
+      {
+        Head: "Shoes",
+        sublink: [
+          {
+            name: "All Shoes",
+            link: "/",
+          },
+          {
+            name: "Newest Sneakers",
+            link: "/",
+          },
+          {
+            name: "Jordan",
+            link: "/",
+          },
+          {
+            name: "Lifestyle",
+            link: "/",
+          },
+          {
+            name: "Running",
+            link: "/",
+          },
+          {
+            name: "Gym and Training",
+            link: "/",
+          },
+          {
+            name: "Basketball",
+            link: "/",
+          },
+          {
+            name: "Football",
+            link: "/",
+          },
+          {
+            name: "Sandals and Slices",
+            link: "/",
+          },
+        ],
+      },
+      {
+        Head: "Clothing",
+        sublink: [
+          {
+            name: "All Clothing",
+            link: "/",
+          },
+          {
+            name: "Tops and T-Shirts",
+            link: "/",
+          },
+          {
+            name: "Pants and Leggings",
+            link: "/",
+          },
+          {
+            name: "Hoodies and Sweatshirts",
+            link: "/",
+          },
+          {
+            name: "Jackets and Gilets",
+            link: "/",
+          },
+          {
+            name: "Jordan",
+            link: "/",
+          },
+        ],
+      },
+      {
+        Head: "Shop By Sport",
+        sublink: [
+          {
+            name: "Running",
+            link: "/",
+          },
+          {
+            name: "Basketball",
+            link: "/",
+          },
+          {
+            name: "Football",
+            link: "/",
+          },
+          {
+            name: "Golf",
+            link: "/",
+          },
+          {
+            name: "Tennis",
+            link: "/",
+          },
+          {
+            name: "Gym and Training",
+            link: "/",
+          },
+          {
+            name: "Yoga",
+            link: "/",
+          },
+          {
+            name: "Skateboarding",
+            link: "/",
+          },
+        ],
+      },
+      {
+        Head: "Jordan",
+        sublink: [
+          {
+            name: "All Jordan",
+            link: "/",
+          },
+          {
+            name: "New Jordan",
+            link: "/",
+          },
+          {
+            name: "Jordan Shoes",
+            link: "/",
+          },
+          {
+            name: "Jordan Clothing",
+            link: "/",
+          },
+          {
+            name: "Jordan Basketball",
+            link: "/",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: "Sale",
+    submenu: true,
+    link: "/",
+    sublinks: [
+      {
+        Head: "Sale",
+        sublink: [
+          {
+            name: "Shop All Sale",
+            link: "/",
+          },
+          {
+            name: "Shoes Sale",
+            link: "/",
+          },
+          {
+            name: "Clothing Sale",
+            link: "/",
+          },
+        ],
+      },
+      {
+        Head: "Men's Sale",
+        sublink: [
+          {
+            name: "Shoes",
+            link: "/",
+          },
+          {
+            name: "Clothing",
+            link: "/",
+          },
+        ],
+      },
+      {
+        Head: "Women's Sale",
+        sublink: [
+          {
+            name: "Shoes",
+            link: "/",
+          },
+          {
+            name: "Clothing",
             link: "/",
           },
         ],

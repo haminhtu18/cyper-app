@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header className="flexCenter bg-[#f5f5f5] h-9">
+    <header className="lg:flexCenter hidden bg-[#f5f5f5] h-9">
       <div className="flexBetween max-container w-full padding-container">
         <Link to="/">
           <svg height="24px" width="24px" fill="#111" viewBox="0 0 26 32">
