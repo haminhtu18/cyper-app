@@ -6,9 +6,7 @@ import Footer from "./components/Footer.jsx";
 function App() {
   return (
     <BrowserRouter>
-      <div>
-        <Header />
-      </div>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
       </Routes>
