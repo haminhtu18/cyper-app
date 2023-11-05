@@ -32,8 +32,8 @@ export default {
       backgroundImage: {
         "bg-img-1": "url('/img-1.png')",
         "bg-img-2": "url('/img-2.png')",
-        "bg-hero":
-          "linear-gradient(90deg, rgba(225,256,250,1) 30%, rgba(50,200,223,1) 50%, rgba(243,150,234,1) 70%, rgba(250,240,234,1) 100%)",
+        "hero-bg": "linear-gradient(91deg, #211C24 0.64%, #211C24 101%)",
+        "banner2-bg": "linear-gradient(100deg, #2E2E2E 42.36%, #000 98.65%)",
         "feature-bg": "url('/feature-bg.png')",
         pattern: "url('/pattern.png')",
         "pattern-2": "url('/pattern-bg.png')",
