@@ -85,3 +85,35 @@ export const DiscountProductss = [
     imgUrl: "../public/Iphone 14 pro 1 white.png",
   },
 ];
+
+export const FOOTER_LINKS = [
+  {
+    title: "Services",
+    subtitle: [
+      { name: "Bonus Program", link: "/" },
+      { name: "Gift cards", link: "/" },
+      { name: "Credit and payment", link: "/" },
+      { name: "Service contracts", link: "/" },
+      { name: "Non-cash account", link: "/" },
+      { name: "Payment", link: "/" },
+    ],
+  },
+  {
+    title: "Assistance to the buyer",
+    subtitle: [
+      { name: "Find an order", link: "/" },
+      { name: "Terms of delivery", link: "/" },
+      { name: "Exchange and return of goods", link: "/" },
+      { name: "Guarantee", link: "/" },
+      { name: "Frequently asked questions", link: "/" },
+      { name: "Terms of use of the site", link: "/" },
+    ],
+  },
+];
+
+export const SOCIAL_LINKS = [
+  "../public/Twitter.svg",
+  "../public/Facebook.svg",
+  "../public/Tiktok.svg",
+  "../public/Instagram.svg",
+];
