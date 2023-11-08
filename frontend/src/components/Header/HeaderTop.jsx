@@ -77,7 +77,7 @@ const HeaderTop = () => {
             <Link to="/" className="text-[24px]">
               <BsCart3 />
             </Link>
-            <Link to="/" className="text-[24px]">
+            <Link to="/login" className="text-[24px]">
               <FiUser />
             </Link>
           </div>
