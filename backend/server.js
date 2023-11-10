@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const userRoute = require("./routes/userRoute");
 const productRoute = require("./routes/productRoute");
-const errorHandler = require("./middleWare/ss");
+const errorHandler = require("./middleWare/errorHandler");
 const cookieParser = require("cookie-parser");
 
 const app = express();
@@ -15,6 +15,12 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+    credentials: true,
+  })
+);
 
 //Routes Middleware
 app.use("/api/users", userRoute);

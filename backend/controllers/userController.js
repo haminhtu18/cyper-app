@@ -30,6 +30,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   if (userExists) {
     res.status(400);
+    console.log("Email nay da ton tai");
     throw new Error("Email has already been registered");
   }
 
@@ -67,6 +68,7 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Invalid user data");
   }
+  console.log(user);
 });
 
 // Login User
@@ -80,18 +82,18 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 
   // Check if user exists
-  const user = await User.findOne({ email });
+  const userEmail = await User.findOne({ email });
 
-  if (!user) {
+  if (!userEmail) {
     res.status(400);
-    throw new Error("User not found, please signup");
+    throw new Error("Sai email vui long nhap lai");
   }
 
   // User exists, check if password is correct
-  const passwordIsCorrect = await bcrypt.compare(password, user.password);
+  const passwordIsCorrect = await bcrypt.compare(password, userEmail.password);
 
   //   Generate Token
-  const token = generateToken(user._id);
+  const token = generateToken(userEmail._id);
 
   if (passwordIsCorrect) {
     // Send HTTP-only cookie
@@ -103,15 +105,14 @@ const loginUser = asyncHandler(async (req, res) => {
       secure: true,
     });
   }
-  if (user && passwordIsCorrect) {
-    const { _id, name, email, photo, phone, bio } = user;
+  if (userEmail && passwordIsCorrect) {
+    const { _id, name, email, photo, phone } = userEmail;
     res.status(200).json({
       _id,
       name,
       email,
       photo,
       phone,
-      bio,
       token,
     });
   } else {
