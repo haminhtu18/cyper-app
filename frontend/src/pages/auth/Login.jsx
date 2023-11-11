@@ -3,6 +3,7 @@ import { useState } from "react";
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -13,15 +14,19 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/api/users/login", {
-        email,
-        password,
-      })
+      .post(
+        "http://localhost:5000/api/users/login",
+        {
+          email,
+          password,
+        },
+        { withCredentials: true }
+      )
       .then((res) => {
-        console.log(res);
         navigate("/");
+        toast.success("Đăng nhập thành công");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error(err));
   };
   return (
     <div className="min-h-screen  flex flex-col justify-center py-12 sm:px-6 lg:px-8">

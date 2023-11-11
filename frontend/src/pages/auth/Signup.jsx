@@ -3,6 +3,7 @@ import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 const Signup = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
@@ -26,11 +27,14 @@ const Signup = () => {
         password,
       })
       .then((res) => {
-        navigate("/");
+        toast.success("Đã tạo thành công tài khoản!");
         ResetRegister();
+        navigate("/login");
         console.log(res);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        toast.error(err.message);
+      });
   };
   return (
     <div className="min-h-screen bg-gray-10 bg-opacity-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">

@@ -15,7 +15,7 @@ const generateToken = (id) => {
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
-  // Validation
+  //Validation
   if (!name || !email || !password) {
     res.status(400);
     throw new Error("Please fill in all required fields");
@@ -26,22 +26,44 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 
   // Check if user email already exists
-  const userExists = await User.findOne({ email });
-
+  let userExists = await User.findOne({ email });
   if (userExists) {
     res.status(400);
     console.log("Email nay da ton tai");
     throw new Error("Email has already been registered");
   }
 
+  let user = {
+    name,
+    email,
+    password,
+  };
+
+  // const tokenActiveAccount = generateToken(user);
+  // const activationUrl = `http:localhost:5173/activation/${tokenActiveAccount}`;
+  // const subject = "Active your account";
+  // const message = `Hello ${user.name}, ấn vào đường dẫn để kích hoạt tài khoản của bạn: ${activationUrl} `;
+  // const send_to = user.email;
+
+  // try {
+  //   await sendEmail({ subject: subject, message: message, send_to: send_to });
+  //   res
+  //     .status(200)
+  //     .json({ success: true, message: `Kiểm tra hòm thư của bạn: ${send_to}` });
+  // } catch (error) {
+  //   res.status(500);
+  //   res.json({ error: error.message });
+  //   console.log(error.message, "Email not sent, please try again");
+  // }
+
   // Create new user
-  const user = await User.create({
+  user = await User.create({
     name,
     email,
     password,
   });
 
-  //   Generate Token
+  // //   Generate Token
   const token = generateToken(user._id);
 
   // Send HTTP-only cookie
@@ -54,21 +76,19 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   if (user) {
-    const { _id, name, email, photo, phone, bio } = user;
+    const { _id, name, email, photo, phone } = user;
     res.status(201).json({
       _id,
       name,
       email,
       photo,
       phone,
-      bio,
       token,
     });
   } else {
     res.status(400);
     throw new Error("Invalid user data");
   }
-  console.log(user);
 });
 
 // Login User
@@ -138,14 +158,13 @@ const getUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
   if (user) {
-    const { _id, name, email, photo, phone, bio } = user;
+    const { _id, name, email, photo, phone } = user;
     res.status(200).json({
       _id,
       name,
       email,
       photo,
       phone,
-      bio,
     });
   } else {
     res.status(400);
@@ -172,11 +191,10 @@ const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
   if (user) {
-    const { name, email, photo, phone, bio } = user;
+    const { name, email, photo, phone } = user;
     user.email = email;
     user.name = req.body.name || name;
     user.phone = req.body.phone || phone;
-    user.bio = req.body.bio || bio;
     user.photo = req.body.photo || photo;
 
     const updatedUser = await user.save();
@@ -186,7 +204,6 @@ const updateUser = asyncHandler(async (req, res) => {
       email: updatedUser.email,
       photo: updatedUser.photo,
       phone: updatedUser.phone,
-      bio: updatedUser.bio,
     });
   } else {
     res.status(404);

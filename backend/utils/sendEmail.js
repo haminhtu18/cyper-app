@@ -1,10 +1,10 @@
 const nodemailer = require("nodemailer");
 
-const sendEmail = async (subject, message, send_to, sent_from, reply_to) => {
+const sendEmail = async (options) => {
   // Create Email Transporter
   const transporter = nodemailer.createTransport({
-    host: process.env.EMAIL_HOST,
-    port: 587,
+    host: "smtp.gmail.com",
+    port: 465,
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
@@ -15,22 +15,16 @@ const sendEmail = async (subject, message, send_to, sent_from, reply_to) => {
   });
 
   // Option for sending email
-  const options = {
-    from: sent_from,
-    to: send_to,
-    replyTo: reply_to,
-    subject: subject,
-    html: message,
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    send_to: options.send_to,
+    subject: options.subject,
+    text: options.message,
+    html: "<b>Test chức năng gửi mail ứng dụng Nodejs với Nodemailer</b>",
   };
 
   // send email
-  transporter.sendMail(options, function (err, info) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(info);
-    }
-  });
+  transporter.sendMail(mailOptions);
 };
 
 module.exports = sendEmail;
