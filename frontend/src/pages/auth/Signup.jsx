@@ -4,37 +4,61 @@ import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { validateEmail } from "../../services/authService";
+
+const initialState = {
+  name: "",
+  email: "",
+  password: "",
+  password2: "",
+};
+
 const Signup = () => {
   const navigate = useNavigate();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [visible, setVisible] = useState("");
+  const [formData, setFormData] = useState(initialState);
+  const { name, email, password, password2 } = formData;
 
-  const ResetRegister = () => {
-    setName("");
-    setEmail("");
-    setPassword("");
+  const [visible, setVisible] = useState();
+
+  const onChangeData = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!name || !email || !password) {
+      return toast.error("Vui lòng nhập đầy đủ thông tin!");
+    }
+    if (password.length < 6) {
+      return toast.error("Mat khau qua ngan");
+    }
+    if (password !== password2) {
+      return toast.warning("Mat khau xac nhan khong dung");
+    }
+    if (!validateEmail(email)) {
+      return toast.warning("Vui long nhap lai email");
+    }
+
+    const user = {
+      name,
+      email,
+      password,
+    };
 
     axios
-      .post("http://localhost:5000/api/users/register", {
-        name,
-        email,
-        password,
-      })
+      .post(
+        "http://localhost:5000/api/users/register",
+        { ...user },
+        {
+          withCredentials: true,
+        }
+      )
       .then((res) => {
-        toast.success("Đã tạo thành công tài khoản!");
-        ResetRegister();
         navigate("/login");
-        console.log(res);
+        toast.success("Dang ki thanh cong!");
       })
-      .catch((err) => {
-        toast.error(err.message);
-      });
+      .catch((err) => toast.error("Email da duoc su dung"));
   };
   return (
     <div className="min-h-screen bg-gray-10 bg-opacity-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -56,11 +80,11 @@ const Signup = () => {
               <div className="mt-1">
                 <input
                   type="text"
-                  name="text"
+                  name="name"
                   autoComplete="name"
                   required
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={onChangeData}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
@@ -80,7 +104,7 @@ const Signup = () => {
                   autoComplete="email"
                   required
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={onChangeData}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
@@ -100,7 +124,7 @@ const Signup = () => {
                   autoComplete="current-password"
                   required
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={onChangeData}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
                 {visible ? (
@@ -116,6 +140,25 @@ const Signup = () => {
                     onClick={() => setVisible(true)}
                   />
                 )}
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="password2"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Confirm Password
+              </label>
+              <div className="mt-1 relative">
+                <input
+                  type="password"
+                  name="password2"
+                  autoComplete="current-password2"
+                  required
+                  value={password2}
+                  onChange={onChangeData}
+                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
               </div>
             </div>
             {/* 

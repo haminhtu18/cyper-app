@@ -9,10 +9,11 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useEffect } from "react";
+axios.defaults.withCredentials = true;
 function App() {
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/users/getuser", { withCredentials: true })
+      .get("http://localhost:5000/api/users/getuser")
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -20,14 +21,12 @@ function App() {
   return (
     <BrowserRouter>
       <ToastContainer />
-      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<Signup />} />
       </Routes>
-      <Footer />
     </BrowserRouter>
   );
 }

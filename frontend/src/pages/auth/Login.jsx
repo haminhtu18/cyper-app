@@ -4,8 +4,12 @@ import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { SET_LOGIN, SET_NAME } from "../../redux/features/authSlice";
 
 const Login = () => {
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,7 +17,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
+    await axios
       .post(
         "http://localhost:5000/api/users/login",
         {
@@ -25,11 +29,15 @@ const Login = () => {
       .then((res) => {
         navigate("/");
         toast.success("Đăng nhập thành công");
+        dispatch(SET_LOGIN(true));
+        dispatch(SET_NAME(res.data.name));
       })
-      .catch((err) => toast.error(err));
+      .catch((err) =>
+        toast.error("Email hoac mat khau chua dung. Xin vui long kiem tra lai")
+      );
   };
   return (
-    <div className="min-h-screen  flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-10  flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           Login to your account
