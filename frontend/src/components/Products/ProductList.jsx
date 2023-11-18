@@ -26,9 +26,7 @@ const ProductList = () => {
       </div>
       <div className="w-full grid grid-cols-3 gap-4">
         {Products.map((product, index) => (
-          <div key={index}>
-            <ProductItem {...product} />
-          </div>
+          <ProductItem {...product} key={index} />
         ))}
       </div>
     </div>

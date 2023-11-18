@@ -2,12 +2,43 @@ import { FiSearch } from "react-icons/fi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsCart3 } from "react-icons/bs";
 import { FiUser } from "react-icons/fi";
-import { headertopLinks } from "../../../data";
+import { headertopLinks, productData } from "../../../data";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const HeaderTop = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchData, setSearchData] = useState(null);
+  const [active, setActive] = useState(false);
+
+  const handleSearchChange = (e) => {
+    const term = e.target.value;
+    setSearchTerm(term);
+
+    const filteredProducts =
+      productData &&
+      productData.filter((product) => {
+        return product.name.toLowerCase().includes(term.toLowerCase());
+      });
+
+    setSearchData(filteredProducts);
+  };
+
+  window.addEventListener("scroll", () => {
+    console.log(window.screenY);
+    if (window.screenY > 70) {
+      return setActive(true);
+    } else {
+      return setActive(false);
+    }
+  });
+
   return (
-    <header className="flexCenter bg-white max-h-[88px]">
+    <header
+      className={`${
+        active === true ? "fixed top-0 left-0 z-20" : null
+      } flexCenter bg-white max-h-[88px] transition`}
+    >
       <div className="max-container flexCenter h-full w-full">
         <div className="py-4 px-40 w-full h-full flex items-center justify-between gap-8">
           <div className="flexCenter">
@@ -50,7 +81,7 @@ const HeaderTop = () => {
           </div>
           {/* Search */}
           <div className="flex relative items-center w-[433px] text-gray-400 focus-within:text-gray-600">
-            <div className="absolute left-4 text-[24px]">
+            <div className="absolute left-4 z-20 text-[24px]">
               <FiSearch />
             </div>
             <input
@@ -59,8 +90,36 @@ const HeaderTop = () => {
               placeholder="Search"
               autoComplete="off"
               aria-label="Search"
-              className="py-4 pr-4 pl-12 w-full border-none focus:ring-gray-300 medium-16 bg-[#F5F5F5] rounded-lg"
+              value={searchTerm}
+              // onBlur={() => setBlur(false)}
+              // onClick={() => setBlur(true)}
+              onChange={handleSearchChange}
+              className="py-4 pr-4 pl-12 w-full border-none focus:ring-gray-300 medium-16 bg-[#F5F5F5] rounded-lg "
             />
+
+            {searchData && searchData.length !== 0 ? (
+              <div
+                className={`absolute min-h-[30vh] max-h-[50vh] overflow-auto bg-slate-50 shadow-sm z-20 p-4 top-14 rounded-2xl`}
+              >
+                {searchData &&
+                  searchData.map((i, index) => {
+                    const d = i.name;
+                    const Product_name = d.replace(/\s+/g, "-");
+                    return (
+                      <Link to={`/product/${Product_name}`} key={index}>
+                        <div className="w-full flex items-start py-3">
+                          <img
+                            src={i.image_Url[0].url}
+                            alt=""
+                            className="w-10 h-10 mr-[10px]"
+                          />
+                          <h1>{i.name}</h1>
+                        </div>
+                      </Link>
+                    );
+                  })}
+              </div>
+            ) : null}
           </div>
           {/* Header Top Links */}
           <ul className="flex items-center gap-[52px] medium-16">

@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home.jsx";
-import Header from "./components/Header/Header.jsx";
-import Footer from "./components/Footer.jsx";
-import Products from "./pages/Products.jsx";
-import Login from "./pages/auth/Login.jsx";
-import Signup from "./pages/auth/Signup.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useEffect } from "react";
+import Home from "./pages/Home.jsx";
+import Products from "./pages/Products.jsx";
+import Login from "./pages/auth/Login.jsx";
+import Signup from "./pages/auth/Signup.jsx";
+import Admin from "./pages/admin/Admin.jsx";
+import ProductDetail from "./components/Products/ProductDetail.jsx";
 axios.defaults.withCredentials = true;
 function App() {
   useEffect(() => {
@@ -26,6 +26,8 @@ function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<Signup />} />
+        <Route path="/admin/*" element={<Admin />} />
+        <Route path="/test" element={<ProductDetail />} />
       </Routes>
     </BrowserRouter>
   );

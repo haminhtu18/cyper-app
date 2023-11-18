@@ -1,4 +1,3 @@
-import React from "react";
 import Breadcrumbs from "../components/Products/Breadcrumbs";
 import ProductList from "../components/Products/ProductList";
 import ProductFilter from "../components/Products/ProductFilter";

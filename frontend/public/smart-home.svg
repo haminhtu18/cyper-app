@@ -1,0 +1,9 @@
+<svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="smart-home">
+        <path id="Path"
+            d="M17.4167 8.26418L12.5281 4.46184C11.6456 3.77524 10.4095 3.77524 9.52696 4.46184L4.63746 8.26418C4.042 8.72725 3.69386 9.43943 3.69421 10.1938V16.7938C3.69421 17.8063 4.51503 18.6271 5.52755 18.6271H16.5275C17.5401 18.6271 18.3609 17.8063 18.3609 16.7938V10.1938C18.3609 9.43934 18.0125 8.72709 17.4167 8.26418"
+            stroke="#8B909A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+        <path id="Path_2" d="M14.6667 14.0299C12.6409 15.2518 9.35737 15.2518 7.33337 14.0299" stroke="#8B909A"
+            stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+</svg>

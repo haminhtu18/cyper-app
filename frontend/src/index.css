@@ -96,7 +96,7 @@ body {
     @apply py-4 text-center px-[56px] text-white border border-[#FFF] rounded-[6px];
   }
   .btn_black_text {
-    @apply py-4 text-center px-[56px] text-black border border-[#000] rounded-[6px];
+    @apply py-4 text-center px-[56px] text-black font-semibold border border-[#000] rounded-[6px];
   }
   .btn_black {
     @apply py-3 text-center px-[64px] text-white border border-[#FFF] rounded-[6px] bg-[#000];

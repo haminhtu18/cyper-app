@@ -11,6 +11,7 @@ const Home = () => {
   return (
     <>
       <Header />
+
       <Hero />
       <CategoryHome />
       <ProductsHome />

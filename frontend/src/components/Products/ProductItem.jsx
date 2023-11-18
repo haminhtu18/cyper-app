@@ -2,14 +2,11 @@ import { useState } from "react";
 import heart from "../../assets/icon/heart.svg";
 import heartRed from "../../assets/icon/heartRed.svg";
 import Button from "../Button";
+import { Link } from "react-router-dom";
 
-const ProductItem = ({ imgUrl, name, price }) => {
+const ProductItem = ({ imgUrl, name, price, category }) => {
   const [heartOpen, setHeartOpen] = useState(false);
-  const [test, setTest] = useState(1);
-  const handleSubmit = () => {
-    setTest(test + 1);
-    console.log(test);
-  };
+  const [open, setOpen] = useState(false);
   return (
     <div className="min-w-[200px] bg-[#F6F6F6] rounded-[9px] flex flex-col items-center py-6 px-4 gap-4">
       <div className="w-full flex justify-end">
@@ -19,7 +16,7 @@ const ProductItem = ({ imgUrl, name, price }) => {
             alt="heartRed"
             width={32}
             height={32}
-            onClick={() => setHeartOpen(false)}
+            onClick={() => setHeartOpen(!heartOpen)}
           />
         ) : (
           <img
@@ -27,7 +24,7 @@ const ProductItem = ({ imgUrl, name, price }) => {
             alt="heart"
             width={32}
             height={32}
-            onClick={() => setHeartOpen(true)}
+            onClick={() => setHeartOpen(!heartOpen)}
           />
         )}
       </div>
@@ -39,9 +36,9 @@ const ProductItem = ({ imgUrl, name, price }) => {
           <h3 className="medium-16  h-12">{name}</h3>
           <span className="text-[24px] font-[600] leading-6">{price}</span>
         </div>
-        <div onClick={() => handleSubmit()}>
+        <Link to={`/product/${category}/${name}`}>
           <Button title="Buy Now" variant="btn_black" />
-        </div>
+        </Link>
       </div>
     </div>
   );
