@@ -25,19 +25,18 @@ const HeaderTop = () => {
   };
 
   window.addEventListener("scroll", () => {
-    console.log(window.screenY);
-    if (window.screenY > 70) {
-      return setActive(true);
+    if (window.scrollY > 70) {
+      setActive(true);
     } else {
-      return setActive(false);
+      setActive(false);
     }
   });
 
   return (
     <header
       className={`${
-        active === true ? "fixed top-0 left-0 z-20" : null
-      } flexCenter bg-white max-h-[88px] transition`}
+        active === true ? "fixed z-20 top-0 shadow-md" : null
+      } flexCenter bg-white max-h-[88px] w-full transition-all`}
     >
       <div className="max-container flexCenter h-full w-full">
         <div className="py-4 px-40 w-full h-full flex items-center justify-between gap-8">

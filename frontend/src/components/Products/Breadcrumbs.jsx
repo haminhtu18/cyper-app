@@ -1,6 +1,6 @@
 import { useState } from "react";
 import arrowRight from "../../assets/icon/ArrowRight.svg";
-const Breadcrumbs = () => {
+const Breadcrumbs = ({ category }) => {
   const [testActive, setTestActive] = useState(true);
 
   return (
@@ -12,7 +12,9 @@ const Breadcrumbs = () => {
           <span>Catalog</span>
           <img src={arrowRight} alt="arrowRight" width={24} height={24} />
 
-          <span className={`${testActive && "text-[#000]"}`}>Smartphones</span>
+          <span className={`${testActive && "text-[#000]"} capitalize`}>
+            {category}
+          </span>
         </div>
       </div>
     </section>
