@@ -1,5 +1,6 @@
 import Footer from "../components/Footer";
-import Header from "../components/Header/Header";
+import HeaderTop from "../components/Header/HeaderTop";
+import Navbar from "../components/Header/Navbar";
 import Banner from "../components/Home/Banner";
 import Banner2 from "../components/Home/Banner2";
 import CategoryHome from "../components/Home/CategoryHome";
@@ -10,13 +11,13 @@ import ProductsHome from "../components/Home/ProductsHome";
 const Home = () => {
   return (
     <>
-      <Header />
-
+      <HeaderTop />
+      <Navbar />
       <Hero />
       <CategoryHome />
-      <ProductsHome />
+      {/* <ProductsHome /> */}
       <Banner />
-      <DiscountProducts />
+      {/* <DiscountProducts /> */}
       <Banner2 />
       <Footer />
     </>

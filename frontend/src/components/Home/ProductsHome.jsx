@@ -1,8 +1,5 @@
 import { useState } from "react";
-import { Products } from "../../../data/index.js";
-import heart from "../../assets/icon/heart.svg";
-import heartRed from "../../assets/icon/heartRed.svg";
-import Button from "../Button";
+import { productData } from "../../../data/index.js";
 import ProductItem from "../Products/ProductItem.jsx";
 
 const ProductsHome = () => {
@@ -22,7 +19,7 @@ const ProductsHome = () => {
             </span>
           </div>
           <ul className="w-full h-full grid grid-cols-4 grid-rows-2 gap-4">
-            {Products.map((product, index) => (
+            {productData.map((product, index) => (
               <ProductItem {...product} key={index} />
             ))}
           </ul>

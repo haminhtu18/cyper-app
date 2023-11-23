@@ -1,10 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { validateEmail } from "../../services/authService";
+import { useSelector } from "react-redux";
+import { selectIsLoggedIn } from "../../redux/features/authSlice";
 
 const initialState = {
   name: "",
@@ -15,10 +17,18 @@ const initialState = {
 
 const Signup = () => {
   const navigate = useNavigate();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const [formData, setFormData] = useState(initialState);
   const { name, email, password, password2 } = formData;
 
   const [visible, setVisible] = useState();
+  const [visible2, setVisible2] = useState();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, []);
 
   const onChangeData = (e) => {
     const { name, value } = e.target;
@@ -151,7 +161,7 @@ const Signup = () => {
               </label>
               <div className="mt-1 relative">
                 <input
-                  type="password"
+                  type={visible2 ? "text" : "password"}
                   name="password2"
                   autoComplete="current-password2"
                   required
@@ -159,6 +169,19 @@ const Signup = () => {
                   onChange={onChangeData}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
+                {visible2 ? (
+                  <AiOutlineEye
+                    className="absolute right-2 top-2 cursor-pointer"
+                    size={25}
+                    onClick={() => setVisible2(false)}
+                  />
+                ) : (
+                  <AiOutlineEyeInvisible
+                    className="absolute right-2 top-2 cursor-pointer"
+                    size={25}
+                    onClick={() => setVisible2(true)}
+                  />
+                )}
               </div>
             </div>
             {/* 

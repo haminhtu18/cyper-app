@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { Products } from "../../../data";
 import ProductItem from "./ProductItem";
 
-const ProductList = () => {
+const ProductList = ({ products }) => {
   const [Sort, setSort] = useState(null);
+  console.log(products);
   return (
     <div className="flex flex-col gap-6 w-full">
       <div className="flexBetween w-full">
         <p className="medium-16">
-          Selected Products: <b>85</b>
+          Selected Products: <b>{products.length}</b>
         </p>
 
         <div className="py-2 px-4 flex justify-between border-[0.5px] border-solid border-[#D4D4D4] min-w-[140px] max-w-[256px] rounded-lg">
@@ -25,7 +25,7 @@ const ProductList = () => {
         </div>
       </div>
       <div className="w-full grid grid-cols-3 gap-4">
-        {Products.map((product, index) => (
+        {products?.map((product, index) => (
           <ProductItem {...product} key={index} />
         ))}
       </div>

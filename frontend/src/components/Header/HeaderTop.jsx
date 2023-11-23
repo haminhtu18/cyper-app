@@ -5,12 +5,15 @@ import { FiUser } from "react-icons/fi";
 import { headertopLinks, productData } from "../../../data";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import Cart from "../cart/Cart";
+import WishList from "../WishList/WishList";
 
 const HeaderTop = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchData, setSearchData] = useState(null);
   const [active, setActive] = useState(false);
-
+  const [openCart, setOpenCart] = useState(false);
+  const [openWishList, setOpenWishList] = useState(false);
   const handleSearchChange = (e) => {
     const term = e.target.value;
     setSearchTerm(term);
@@ -34,9 +37,7 @@ const HeaderTop = () => {
 
   return (
     <header
-      className={`${
-        active === true ? "fixed z-20 top-0 shadow-md" : null
-      } flexCenter bg-white max-h-[88px] w-full transition-all`}
+      className={`fixed z-20 top-0 shadow-md flexCenter bg-white max-h-[88px] w-full transition-all`}
     >
       <div className="max-container flexCenter h-full w-full">
         <div className="py-4 px-40 w-full h-full flex items-center justify-between gap-8">
@@ -129,18 +130,22 @@ const HeaderTop = () => {
             ))}
           </ul>
           <div className="flex items-center gap-6">
-            <Link to="/" className="text-[24px]">
-              <AiOutlineHeart />
-            </Link>
-            <Link to="/" className="text-[24px]">
-              <BsCart3 />
-            </Link>
-            <Link to="/login" className="text-[24px]">
-              <FiUser />
-            </Link>
+            <div className="text-[24px]" onClick={() => setOpenWishList(true)}>
+              <AiOutlineHeart className="cursor-pointer" />
+            </div>
+            <div className="text-[24px]" onClick={() => setOpenCart(true)}>
+              <BsCart3 className="cursor-pointer" />
+            </div>
+            <div className="text-[24px]">
+              <FiUser className="cursor-pointer" />
+            </div>
           </div>
         </div>
       </div>
+      {/* Cart */}
+      {openCart ? <Cart setOpenCart={setOpenCart} /> : null}
+      {/* WishList */}
+      {openWishList ? <WishList setOpenWishList={setOpenWishList} /> : null}
     </header>
   );
 };

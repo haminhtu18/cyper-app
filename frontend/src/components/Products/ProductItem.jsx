@@ -4,7 +4,7 @@ import heartRed from "../../assets/icon/heartRed.svg";
 import Button from "../Button";
 import { Link } from "react-router-dom";
 
-const ProductItem = ({ imgUrl, name, price, category }) => {
+const ProductItem = ({ image_Url, name, price, category }) => {
   const [heartOpen, setHeartOpen] = useState(false);
   const [open, setOpen] = useState(false);
   return (
@@ -29,7 +29,7 @@ const ProductItem = ({ imgUrl, name, price, category }) => {
         )}
       </div>
       <div>
-        <img src={imgUrl} alt="imgURL" width={160} height={160} />
+        <img src={image_Url[0].url} alt="imgURL" width={160} height={160} />
       </div>
       <div className="flexCenter flex-col gap-6">
         <div className="flexCenter flex-col text-center gap-4">

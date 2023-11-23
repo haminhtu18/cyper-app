@@ -1,19 +1,30 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { SET_LOGIN, SET_NAME } from "../../redux/features/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  SET_LOGIN,
+  SET_NAME,
+  selectIsLoggedIn,
+} from "../../redux/features/authSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
-
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+      window.location.reload(true);
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,9 +43,10 @@ const Login = () => {
         dispatch(SET_LOGIN(true));
         dispatch(SET_NAME(res.data.name));
       })
-      .catch((err) =>
-        toast.error("Email hoac mat khau chua dung. Xin vui long kiem tra lai")
-      );
+      .catch((err) => {
+        console.log(err);
+        toast.error("Email hoac mat khau chua dung. Xin vui long kiem tra lai");
+      });
   };
   return (
     <div className="min-h-screen bg-gray-10  flex flex-col justify-center py-12 sm:px-6 lg:px-8">
