@@ -1,16 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const name = JSON.parse(localStorage.getItem("name"));
+// const name = JSON.parse(localStorage.getItem("name"));
 
 const initialState = {
   isLoggedIn: false,
+  isLoading: true,
   name: name ? name : "",
   user: {
-    name: "",
     email: "",
+    name: "",
     phone: "",
-    photo: "",
-    rule: "",
+    photo: {} || "",
+    role: "",
+    _id: "",
   },
 };
 
@@ -28,12 +30,16 @@ const authSlice = createSlice({
       console.log(action.payload);
     },
     SET_USER(state, action) {
-      const profile = action.payload;
-      state.user.name = profile.name;
-      state.user.email = profile.email;
-      state.user.phone = profile.phone;
-      state.user.photo = profile.photo;
-      state.user.rule = profile.rule;
+      console.log(action.payload);
+      state.user.email = action.payload.email;
+      state.user.name = action.payload.name;
+      state.user.phone = action.payload.phone;
+      state.user.photo = action.payload.photo;
+      state.user.role = action.payload.role;
+      state.user._id = action.payload._id;
+    },
+    SET_ADMIN_REQUEST(state) {
+      state.isLoading = true;
     },
   },
 });
@@ -43,5 +49,6 @@ export const { SET_LOGIN, SET_NAME, SET_USER } = authSlice.actions;
 export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
 export const selectName = (state) => state.auth.name;
 export const selectUser = (state) => state.auth.user;
+export const selectIsLoading = (state) => state.auth.isLoading;
 
 export default authSlice.reducer;

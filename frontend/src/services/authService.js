@@ -9,6 +9,7 @@ export const validateEmail = (email) => {
   );
 };
 
+// registerUser
 const registerUser = async (userData) => {
   try {
     const response = await axios.post(
@@ -16,9 +17,6 @@ const registerUser = async (userData) => {
       userData,
       { withCredentials: true }
     );
-    if (response.statusText === "OK") {
-      toast.success("User registered successfully");
-    }
     return response.data;
   } catch (err) {
     const message =
@@ -29,4 +27,67 @@ const registerUser = async (userData) => {
   }
 };
 
-export { registerUser };
+// registerUser
+const loginUser = async (userData) => {
+  try {
+    const response = await axios.post(
+      `${BACKEND_URL}/api/users/login`,
+      userData,
+      { withCredentials: true }
+    );
+
+    return response.data;
+  } catch (err) {
+    const message =
+      (err.response && err.response.data & err.response.data.message) ||
+      err.message ||
+      err.toString();
+    toast.error(message);
+  }
+};
+
+// get Login Status
+const getLoginStatus = async () => {
+  try {
+    const response = await axios.get(`${BACKEND_URL}/api/users/loggedin`, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (err) {
+    const message =
+      (err.response && err.response.data & err.response.data.message) ||
+      err.message ||
+      err.toString();
+    toast.error(message);
+  }
+};
+
+//get Profile User
+const getProfileUser = async () => {
+  try {
+    const response = await axios.get(`${BACKEND_URL}/api/users/getuser`, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+//LogOut User
+const getLogOutUser = () => {
+  try {
+    const res = axios.get(`${BACKEND_URL}/api/users/logout`);
+    return res.data;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
+export {
+  registerUser,
+  loginUser,
+  getLoginStatus,
+  getProfileUser,
+  getLogOutUser,
+};

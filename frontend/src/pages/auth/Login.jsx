@@ -5,11 +5,7 @@ import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  SET_LOGIN,
-  SET_NAME,
-  selectIsLoggedIn,
-} from "../../redux/features/authSlice";
+import { SET_LOGIN, selectIsLoggedIn } from "../../redux/features/authSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -19,12 +15,14 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
 
+  console.log(isLoggedIn);
+
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isLoggedIn === true) {
       navigate("/");
       window.location.reload(true);
     }
-  }, []);
+  }, [isLoggedIn, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,9 +37,8 @@ const Login = () => {
       )
       .then((res) => {
         navigate("/");
-        toast.success("Đăng nhập thành công");
         dispatch(SET_LOGIN(true));
-        dispatch(SET_NAME(res.data.name));
+        window.location.reload(true);
       })
       .catch((err) => {
         console.log(err);

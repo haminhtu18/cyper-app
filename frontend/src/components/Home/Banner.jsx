@@ -3,7 +3,7 @@ import applewatch from "../../assets/image/image 12.png";
 import ipadpro from "../../assets/image/image 64.png";
 import galaxyphone from "../../assets/image/image 41.png";
 import macbookpro from "../../assets/image/Macbook 1.png";
-import Button from "../Button";
+import Button from "../UI/Button";
 
 const Banner = () => {
   return (

@@ -1,7 +1,7 @@
 import { RxCross1 } from "react-icons/rx";
+import { BsCartPlus } from "react-icons/bs";
 import { IoBagHandleOutline } from "react-icons/io5";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
 const cartItems = [
   {
@@ -37,9 +37,11 @@ const WishList = ({ setOpenWishList }) => {
           {/* Item length */}
           <div className="flex items-center p-4">
             <IoBagHandleOutline size={25} />
-            <h5 className="p-2 medium-20">5 items</h5>
+            <h5 className="p-2 medium-20">
+              {cartItems.length} item{cartItems.length > 0 && "s"}
+            </h5>
           </div>
-          {/* Cart Single Items */}
+          {/* WishList Single Item */}
           <div className="w-full border-t">
             {cartItems.length === 0 ? (
               <div>NO ITEM in Cart</div>
@@ -71,9 +73,11 @@ const WithListSingle = ({ data }) => {
           <div className="text-start medium-14 flex-1">
             <h3>{data.name}</h3>
             <p>#{data.id}</p>
+            <p>${data.price}</p>
           </div>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="inline-block">
+          <BsCartPlus size={20} className="cursor-pointer mb-4" />
           <RxCross1 size={18} className="cursor-pointer" />
         </div>
       </div>

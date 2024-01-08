@@ -4,7 +4,7 @@ import { productDetail } from "../../../data";
 const Detail = () => {
   return (
     <>
-      <div className="w-full py-20">
+      <div className="w-full py-10">
         <div className="bg-[#FFF] px-10 py-12 flex flex-col gap-8">
           <h4 className="text-[24px] font-medium">Details</h4>
           <div>

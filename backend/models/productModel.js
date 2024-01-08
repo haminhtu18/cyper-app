@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const productSchema = mongoose.Schema(
   {
-    user: {
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "User",
@@ -12,37 +12,52 @@ const productSchema = mongoose.Schema(
       required: [true, "Please add a name"],
       trim: true,
     },
-    sizes: {
-      type: Array,
-      default: [40, 41, 42],
-    },
-    type: {
+    desc: {
       type: String,
-      required: true,
+      required: [true, "Please add a description"],
+      trim: true,
     },
     category: {
       type: String,
       required: [true, "Please add a category"],
       trim: true,
     },
-    quantity: {
+    tags: {
       type: String,
-      required: [true, "Please add a quantity"],
+      required: [true, "Please add a tags"],
       trim: true,
     },
-    price: {
-      type: String,
+    currentPrice: {
+      type: Number,
+    },
+    discountPrice: {
+      type: Number,
       required: [true, "Please add a price"],
       trim: true,
     },
-    desc: {
-      type: String,
-      required: [true, "Please add a description"],
-      trim: true,
+    stock: {
+      type: Number,
+      required: [true, "Please add a stock"],
     },
-    image: {
-      type: Object,
-      default: {},
+    images: [
+      {
+        public_id: {
+          type: String,
+          required: true,
+        },
+        url: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+    sold_out: {
+      type: Number,
+      default: 0,
+    },
+    createAt: {
+      type: Date,
+      default: Date.now(),
     },
   },
   {

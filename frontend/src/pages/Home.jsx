@@ -1,4 +1,4 @@
-import Footer from "../components/Footer";
+import Footer from "../components/UI/Footer";
 import HeaderTop from "../components/Header/HeaderTop";
 import Navbar from "../components/Header/Navbar";
 import Banner from "../components/Home/Banner";

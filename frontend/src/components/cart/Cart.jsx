@@ -23,8 +23,8 @@ const cartItems = [
 
 const Cart = ({ setOpenCart }) => {
   return (
-    <div className="fixed top-0 left-0 h-screen w-full bg-gray-10/[.3] z-20">
-      <div className="fixed top-0 right-0 min-h-full w-1/4 bg-white flex flex-col z-30 overflow-y-auto">
+    <div className="fixed top-0 left-0 h-screen w-full bg-gray-10/[.3] z-40">
+      <div className="fixed top-0 right-0 min-h-full w-1/4 bg-white flex flex-col z-50 overflow-y-auto">
         <div>
           <div className="flex w-full justify-end pt-5 pr-5">
             <RxCross1

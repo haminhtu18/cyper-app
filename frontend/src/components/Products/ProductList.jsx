@@ -25,8 +25,8 @@ const ProductList = ({ products }) => {
         </div>
       </div>
       <div className="w-full grid grid-cols-3 gap-4">
-        {products?.map((product, index) => (
-          <ProductItem {...product} key={index} />
+        {products?.map((product) => (
+          <ProductItem {...product} key={product._id} />
         ))}
       </div>
     </div>

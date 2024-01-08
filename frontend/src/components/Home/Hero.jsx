@@ -3,7 +3,7 @@ import Playstation5 from "../../assets/image/playstaytion.png";
 import headphones from "../../assets/image/headphone.png";
 import vision from "../../assets/image/vision.png";
 import macbookpro14 from "../../assets/image/macbookpro.webp";
-import Button from "../Button";
+import Button from "../UI/Button";
 
 const Hero = () => {
   return (

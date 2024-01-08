@@ -23,6 +23,10 @@ const userSchema = mongoose.Schema(
       minLength: [6, "Password must be up to 6 characters"],
       //   maxLength: [23, "Password must not be more than 23 characters"],
     },
+    address: {
+      type: String,
+      default: "Binh Duong",
+    },
     photo: {
       public_id: {
         type: String,

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import arrowRight from "../../assets/icon/ArrowRight.svg";
-import { useNavigate } from "react-router-dom";
-const Breadcrumbs = ({ category }) => {
+import { Link, useNavigate } from "react-router-dom";
+const Breadcrumbs = ({ category, name }) => {
   const [testActive, setTestActive] = useState(true);
+  console.log(category);
   const navigator = useNavigate();
   return (
     <section className="flexCenter w-full">
@@ -12,12 +13,29 @@ const Breadcrumbs = ({ category }) => {
             Home
           </span>
           <img src={arrowRight} alt="arrowRight" width={24} height={24} />
-          <span>Catalog</span>
-          <img src={arrowRight} alt="arrowRight" width={24} height={24} />
+          <Link to="/products">
+            <span className={`${category === null && "text-[#000]"}`}>
+              Catalog
+            </span>
+          </Link>
+          {category === null ? null : (
+            <>
+              <img src={arrowRight} alt="arrowRight" width={24} height={24} />
 
-          <span className={`${testActive && "text-[#000]"} capitalize`}>
-            {category}
-          </span>
+              <span className={`${testActive && "text-[#000]"} capitalize`}>
+                {category}
+              </span>
+            </>
+          )}
+          {name === null ? null : (
+            <>
+              <img src={arrowRight} alt="arrowRight" width={24} height={24} />
+
+              <span className={`${testActive && "text-[#000]"} capitalize`}>
+                {name}
+              </span>
+            </>
+          )}
         </div>
       </div>
     </section>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { DiscountProductss } from "../../../data/index.js";
 import heart from "../../assets/icon/heart.svg";
 import heartRed from "../../assets/icon/heartRed.svg";
-import Button from "../Button";
+import Button from "../UI/Button.jsx";
 import ProductItem from "../Products/ProductItem.jsx";
 
 const DiscountProducts = () => {

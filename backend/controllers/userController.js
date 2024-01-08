@@ -76,13 +76,15 @@ const registerUser = asyncHandler(async (req, res) => {
   // });
 
   if (user) {
-    const { _id, name, email, photo, phone } = user;
+    const { _id, name, email, photo, phone, role, address } = user;
     res.status(201).json({
       _id,
       name,
       email,
       photo,
       phone,
+      role,
+      address,
     });
   } else {
     res.status(400);
@@ -125,13 +127,15 @@ const loginUser = asyncHandler(async (req, res) => {
     });
   }
   if (userEmail && passwordIsCorrect) {
-    const { _id, name, email, photo, phone } = userEmail;
+    const { _id, name, email, photo, phone, address, role } = userEmail;
     res.status(200).json({
       _id,
       name,
       email,
       photo,
+      address,
       phone,
+      role,
       token,
     });
   } else {
@@ -145,11 +149,11 @@ const logout = asyncHandler(async (req, res) => {
   res.cookie("token", "", {
     path: "/",
     httpOnly: true,
-    expires: new Date(0),
+    expires: new Date(Date.now()),
     sameSite: "none",
     secure: true,
   });
-  return res.status(200).json({ message: "Successfully Logged Out" });
+  return res.status(201).json({ message: "Successfully Logged Out" });
 });
 
 // Get User Data
@@ -157,13 +161,15 @@ const getUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
   if (user) {
-    const { _id, name, email, photo, phone } = user;
+    const { _id, name, email, photo, phone, role, address } = user;
     res.status(200).json({
       _id,
       name,
       email,
       photo,
       phone,
+      role,
+      address,
     });
   } else {
     res.status(400);
@@ -190,11 +196,13 @@ const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
   if (user) {
-    const { name, email, photo, phone } = user;
+    const { name, email, photo, phone, address, role } = user;
     user.email = email;
     user.name = req.body.name || name;
     user.phone = req.body.phone || phone;
     user.photo = req.body.photo || photo;
+    user.address = req.body.address || address;
+    user.role = req.body.role || role;
 
     const updatedUser = await user.save();
     res.status(200).json({
@@ -203,6 +211,7 @@ const updateUser = asyncHandler(async (req, res) => {
       email: updatedUser.email,
       photo: updatedUser.photo,
       phone: updatedUser.phone,
+      role: updatedUser.role,
     });
   } else {
     res.status(404);

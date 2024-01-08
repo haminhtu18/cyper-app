@@ -152,6 +152,15 @@ export const FOOTER_LINKS = [
   },
 ];
 
+export const CATEGORIES_DATA = [
+  { id: 1, name: "Phones" },
+  { id: 2, name: "Computers" },
+  { id: 3, name: "Smart Watches" },
+  { id: 4, name: "Cameras" },
+  { id: 5, name: "Headphones" },
+  { id: 6, name: "Gaming" },
+];
+
 export const SOCIAL_LINKS = [
   "/Twitter.svg",
   "/Facebook.svg",
@@ -265,6 +274,7 @@ export const productData = [
     stock: 10,
   },
   {
+    price: 1099,
     id: 2,
     category: "phones",
     name: "Iphone 14 pro max 256 gb ssd and 8 gb ram silver colour",

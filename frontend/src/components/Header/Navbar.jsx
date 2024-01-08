@@ -7,7 +7,7 @@ import { RiHeadphoneLine } from "react-icons/ri";
 
 const Navbar = () => {
   return (
-    <nav className="flexCenter w-full h-[64px] mt-20">
+    <nav className="lg:flexCenter w-full h-[60px] hidden lg:mt-20">
       <div className="max-container flexCenter bg-[#2E2E2E] w-full h-full">
         <div className="py-2 px-40 flex items-center justify-between text-white opacity-50 w-full h-full">
           <Link

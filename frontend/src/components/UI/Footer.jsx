@@ -1,5 +1,6 @@
-import logo from "../assets/logo/LogoVector(white).svg";
-import { FOOTER_LINKS, SOCIAL_LINKS } from "../../data/index.js";
+import { FOOTER_LINKS, SOCIAL_LINKS } from "../../../data";
+import logo from "../../assets/logo/LogoVector(white).svg";
+
 import { Link } from "react-router-dom";
 
 const Footer = () => {

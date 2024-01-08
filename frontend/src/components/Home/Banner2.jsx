@@ -3,7 +3,7 @@ import banner2 from "../../assets/image/banner2-2.png";
 import banner3 from "../../assets/image/banner2-3.png";
 import banner4 from "../../assets/image/banner2-4.png";
 import banner5 from "../../assets/image/banner2-5.png";
-import Button from "../Button";
+import Button from "../UI/Button";
 
 const Banner2 = () => {
   return (
