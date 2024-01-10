@@ -12,9 +12,10 @@ import Footer from "../UI/Footer";
 import Navbar from "../Header/Navbar";
 import SuggestedProduct from "./SuggestedProduct";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCart } from "../../redux/features/cartSlice";
+import { ADDTOCART, selectCart } from "../../redux/features/cartSlice";
 import { getProduct, selectProduct } from "../../redux/features/productSlice";
 import Breadcrumbs from "./Breadcrumbs";
+import { toast } from "react-toastify";
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -29,13 +30,26 @@ const ProductDetail = () => {
     dispatch(getProduct(id));
   }, []);
 
-  const handleAddToCart = (id) => {};
+  const handleAddToCart = (id) => {
+    const isItemExists = cart && cart.find((item) => item._id === id);
+    if (isItemExists) {
+      toast.error("Item already exists");
+    } else {
+      if (product.stock === 0) {
+        toast.error("Product stock limited");
+      } else {
+        const cartData = { ...product, sty: 1 };
+        dispatch(ADDTOCART(cartData));
+        toast.success("Item added to cart successfully");
+      }
+    }
+  };
 
   return (
     <>
       <HeaderTop />
       <Navbar />
-      <Breadcrumbs category={product.category} name={product.name} />
+      <Breadcrumbs category={product?.category} name={product?.name} />
       {product ? (
         <section className="flexCenter w-full bg-[#FAFAFA]">
           <div className="max-container w-full px-40">
@@ -86,7 +100,7 @@ const ProductDetail = () => {
                     />
                   </div>
                   <div
-                    onClick={() => handleAddToCart(product)}
+                    onClick={() => handleAddToCart(product._id)}
                     className="w-full h-full flex items-center justify-center"
                   >
                     <Button

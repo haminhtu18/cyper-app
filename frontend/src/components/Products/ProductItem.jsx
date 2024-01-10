@@ -5,7 +5,6 @@ import Button from "../UI/Button";
 import { Link } from "react-router-dom";
 
 const ProductItem = (product) => {
-  console.log(product);
   const [heartOpen, setHeartOpen] = useState(false);
   return (
     <div className="min-w-[200px] max-w-[279px] bg-[#F6F6F6] rounded-[9px] flex flex-col items-center py-6 px-4 gap-4 shadow">
