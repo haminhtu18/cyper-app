@@ -62,6 +62,55 @@ const getLoginStatus = async () => {
   }
 };
 
+// update Profile User
+const updateProfileUser = async (formData) => {
+  try {
+    const response = await axios.patch(
+      `${BACKEND_URL}/api/users/updateuser`,
+      formData,
+      {
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+// update User Address
+const updateUserAddress = async (formData) => {
+  try {
+    const response = await axios.put(
+      `${BACKEND_URL}/api/users/update-user-address`,
+      formData,
+      {
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+// delete User Address
+const deleteUserAddress = async (id) => {
+  try {
+    const response = await axios.put(
+      `${BACKEND_URL}/api/users/delete-user-address/:${id}`,
+      {
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log("====================================");
+    console.log(error.message);
+    console.log("====================================");
+  }
+};
+
 //get Profile User
 const getProfileUser = async () => {
   try {
@@ -90,4 +139,7 @@ export {
   getLoginStatus,
   getProfileUser,
   getLogOutUser,
+  updateProfileUser,
+  updateUserAddress,
+  deleteUserAddress,
 };

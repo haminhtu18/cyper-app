@@ -161,7 +161,7 @@ const getUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
   if (user) {
-    const { _id, name, email, photo, phone, role, address } = user;
+    const { _id, name, email, photo, phone, role, addresses } = user;
     res.status(200).json({
       _id,
       name,
@@ -169,7 +169,7 @@ const getUser = asyncHandler(async (req, res) => {
       photo,
       phone,
       role,
-      address,
+      addresses,
     });
   } else {
     res.status(400);
@@ -219,6 +219,31 @@ const updateUser = asyncHandler(async (req, res) => {
   }
 });
 
+//Update Address User
+const updateAddressUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+  console.log(req.body);
+  const sameTypeAddress = user.addresses.find(
+    (address) => address.addressType === req.body.addressType
+  );
+  if (sameTypeAddress) {
+    res.status(400);
+    throw new Error("Address none found");
+  }
+  const existAddress = user.addresses.find(
+    (address) => address._id === req.body._id
+  );
+  if (existAddress) {
+    Object.assign(existAddress, req.body);
+  } else {
+    user.addresses.push(req.body);
+  }
+
+  await user.save();
+  res.status(200).json(user);
+});
+
+//Change Password User
 const changePassword = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
   const { oldPassword, password } = req.body;
@@ -345,6 +370,7 @@ module.exports = {
   getUser,
   loginStatus,
   updateUser,
+  updateAddressUser,
   changePassword,
   forgotPassword,
   resetPassword,

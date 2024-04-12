@@ -1,11 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import heart from "../../assets/icon/heart.svg";
 import heartRed from "../../assets/icon/heartRed.svg";
 import Button from "../UI/Button";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  ADDTOWISHLIST,
+  REMOTEFROMWISHLIST,
+  selectWishlist,
+} from "../../redux/features/wishlistSlice";
 
 const ProductItem = (product) => {
+  const wishlist = useSelector(selectWishlist);
   const [heartOpen, setHeartOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (wishlist && wishlist.find((i) => i._id === product._id)) {
+      setHeartOpen(true);
+    } else {
+      setHeartOpen(false);
+    }
+  }, [product._id, wishlist]);
+
+  const removeWishListhandler = (product) => {
+    setHeartOpen(!heartOpen);
+    dispatch(REMOTEFROMWISHLIST(product));
+  };
+
+  const addWishListhandler = (product) => {
+    setHeartOpen(!heartOpen);
+    dispatch(ADDTOWISHLIST(product));
+  };
   return (
     <div className="min-w-[200px] max-w-[279px] bg-[#F6F6F6] rounded-[9px] flex flex-col items-center py-6 px-4 gap-4 shadow">
       <div className="w-full flex justify-end cursor-pointer">
@@ -15,7 +41,7 @@ const ProductItem = (product) => {
             alt="heartRed"
             width={32}
             height={32}
-            onClick={() => setHeartOpen(!heartOpen)}
+            onClick={() => removeWishListhandler(product)}
           />
         ) : (
           <img
@@ -23,7 +49,7 @@ const ProductItem = (product) => {
             alt="heart"
             width={32}
             height={32}
-            onClick={() => setHeartOpen(!heartOpen)}
+            onClick={() => addWishListhandler(product)}
           />
         )}
       </div>

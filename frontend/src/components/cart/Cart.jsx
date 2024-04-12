@@ -9,24 +9,6 @@ import {
   selectCart,
 } from "../../redux/features/cartSlice";
 
-const cartItems = [
-  {
-    id: 25139526913984,
-    name: "Apple iPhone 14 Pro Max 128Gb Deep Purple",
-    price: 1399,
-  },
-  {
-    id: 53459358345,
-    name: "AirPods Max Silver",
-    price: 1399,
-  },
-  {
-    id: 63632324,
-    name: "Apple Watch Series 9 GPS 41mm Starlight Aluminium",
-    price: 1399,
-  },
-];
-
 const Cart = ({ setOpenCart }) => {
   const cart = useSelector(selectCart);
   const totalCheckoutCart = cart.reduce(
@@ -55,7 +37,7 @@ const Cart = ({ setOpenCart }) => {
           {/* Cart Single Items */}
           <div className="w-full border-t">
             {cart.length === 0 ? (
-              <div>NO ITEM in Cart</div>
+              <div className="mt-4 text-center medium-20">NO ITEM in Cart</div>
             ) : (
               cart.map((item) => <CartSingle data={item} key={item._id} />)
             )}

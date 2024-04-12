@@ -4,6 +4,7 @@ import ipadpro from "../../assets/image/image 64.png";
 import galaxyphone from "../../assets/image/image 41.png";
 import macbookpro from "../../assets/image/Macbook 1.png";
 import Button from "../UI/Button";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
@@ -32,9 +33,9 @@ const Banner = () => {
               iPad combines a magnificent 10.2-inch Retina display, incredible
               performance, multitasking and ease of use.
             </p>
-            <div>
+            <Link to="/products">
               <Button title="Shop Now" variant="btn_black_text" />
-            </div>
+            </Link>
           </div>
         </div>
         <div className="w-1/4 h-full relative overflow-hidden bg-[#F9F9F9]">

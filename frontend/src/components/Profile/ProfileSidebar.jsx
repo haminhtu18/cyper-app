@@ -47,13 +47,13 @@ const ProfileSidebar = ({ active, setActive, userName }) => {
         {userName === "admin" ? (
           <>
             <HiOutlineShoppingBag
-              size={30}
+              size={20}
               color={active === 2 ? "red" : null}
             />
             <span
               className={`pl-2 ${
                 active === 2 ? "text-[red]" : null
-              } text-[20px] hidden lg:block`}
+              } text-[16px] hidden lg:block`}
             >
               Shop Products
             </span>
@@ -81,13 +81,13 @@ const ProfileSidebar = ({ active, setActive, userName }) => {
         {userName === "admin" ? (
           <>
             <HiOutlineReceiptRefund
-              size={30}
+              size={20}
               color={active === 3 ? "red" : null}
             />
             <span
               className={`pl-2 ${
                 active === 3 ? "text-[red]" : null
-              } text-[20px] hidden lg:block`}
+              } text-[16px] hidden lg:block`}
             >
               Running Events
             </span>

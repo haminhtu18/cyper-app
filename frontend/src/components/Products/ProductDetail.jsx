@@ -16,6 +16,10 @@ import { ADDTOCART, selectCart } from "../../redux/features/cartSlice";
 import { getProduct, selectProduct } from "../../redux/features/productSlice";
 import Breadcrumbs from "./Breadcrumbs";
 import { toast } from "react-toastify";
+import {
+  ADDTOWISHLIST,
+  selectWishlist,
+} from "../../redux/features/wishlistSlice";
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -25,7 +29,7 @@ const ProductDetail = () => {
   const [Img, setImg] = useState(0);
 
   const cart = useSelector(selectCart);
-
+  const wishlist = useSelector(selectWishlist);
   useEffect(() => {
     dispatch(getProduct(id));
   }, []);
@@ -38,10 +42,20 @@ const ProductDetail = () => {
       if (product.stock === 0) {
         toast.error("Product stock limited");
       } else {
-        const cartData = { ...product, sty: 1 };
+        const cartData = { ...product, qty: 1 };
         dispatch(ADDTOCART(cartData));
         toast.success("Item added to cart successfully");
       }
+    }
+  };
+  const handleAddToWishList = (product) => {
+    const isItemExists =
+      wishlist && wishlist.find((item) => item._id === product._id);
+    if (isItemExists) {
+      toast.error("Wishlist has Item");
+    } else {
+      toast.success("Item added to wishlist successfully");
+      dispatch(ADDTOWISHLIST(product));
     }
   };
 
@@ -92,7 +106,10 @@ const ProductDetail = () => {
                   </div>
                 </div>
                 <div className="flex-col py-8 gap-4 justify-between lg:w-full flex lg:flex-row">
-                  <div className="w-full h-full flex items-center justify-center">
+                  <div
+                    className="w-full h-full flex items-center justify-center"
+                    onClick={() => handleAddToWishList(product)}
+                  >
                     <Button
                       type="button"
                       title="Add to Wishlist"

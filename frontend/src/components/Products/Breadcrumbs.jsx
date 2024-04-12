@@ -3,7 +3,8 @@ import arrowRight from "../../assets/icon/ArrowRight.svg";
 import { Link, useNavigate } from "react-router-dom";
 const Breadcrumbs = ({ category, name }) => {
   const [testActive, setTestActive] = useState(true);
-  console.log(category);
+  console.log("category", category);
+  console.log("name", name);
   const navigator = useNavigate();
   return (
     <section className="flexCenter w-full">
@@ -21,17 +22,15 @@ const Breadcrumbs = ({ category, name }) => {
           {category === null ? null : (
             <>
               <img src={arrowRight} alt="arrowRight" width={24} height={24} />
-
-              <span className={`${testActive && "text-[#000]"} capitalize`}>
+              <span className={`${category && "text-[#000]"} capitalize`}>
                 {category}
               </span>
             </>
           )}
-          {name === null ? null : (
+          {name === undefined ? null : (
             <>
               <img src={arrowRight} alt="arrowRight" width={24} height={24} />
-
-              <span className={`${testActive && "text-[#000]"} capitalize`}>
+              <span className={`${name && "text-[#000]"} capitalize`}>
                 {name}
               </span>
             </>

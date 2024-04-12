@@ -36,9 +36,7 @@ const createProduct = asyncHandler(async (req, res) => {
 // Get all Products
 
 const getProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({ userId: req.user.id }).sort(
-    "-createdAt"
-  );
+  const products = await Product.find().sort("-createdAt");
   res.status(200).json(products);
 });
 

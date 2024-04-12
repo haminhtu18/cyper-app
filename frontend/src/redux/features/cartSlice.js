@@ -19,17 +19,18 @@ const cartSlice = createSlice({
           cart: state.cart.map((i) => (i._id === isItemExist._id ? item : i)),
         };
       } else {
-        return {
-          ...state,
-          cart: [...state.cart, item],
-        };
+        const updateState = { ...state, cart: [...state.cart, item] };
+        localStorage.setItem("cartItems", JSON.stringify(updateState.cart));
+        return updateState;
       }
     },
     REMOTEFROMCART: (state, action) => {
-      return {
+      const updateState = {
         ...state,
         cart: state.cart.filter((i) => i._id !== action.payload),
       };
+      localStorage.setItem("cartItems", JSON.stringify(updateState.cart));
+      return updateState;
     },
   },
 });

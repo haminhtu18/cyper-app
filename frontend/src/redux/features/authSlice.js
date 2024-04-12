@@ -1,10 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+  deleteUserAddress,
+  updateUserAddress,
+} from "../../services/authService";
+import { toast } from "react-toastify";
 
 // const name = JSON.parse(localStorage.getItem("name"));
 
 const initialState = {
   isLoggedIn: false,
   isLoading: true,
+  isError: false,
   name: name ? name : "",
   user: {
     email: "",
@@ -13,9 +19,45 @@ const initialState = {
     photo: {} || "",
     role: "",
     _id: "",
+    addresses: [],
   },
 };
 
+export const updateUserAddressSlide = createAsyncThunk(
+  "user/updateUserAddress",
+  async (formData, thunkAPI) => {
+    try {
+      return await updateUserAddress(formData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      console.log(message);
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const deleteUserAddressSlide = createAsyncThunk(
+  "user/updateUserAddress",
+  async (id, thunkAPI) => {
+    try {
+      return await deleteUserAddress(id);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      console.log(message);
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -37,10 +79,28 @@ const authSlice = createSlice({
       state.user.photo = action.payload.photo;
       state.user.role = action.payload.role;
       state.user._id = action.payload._id;
+      state.user.addresses = action.payload.addresses;
     },
     SET_ADMIN_REQUEST(state) {
       state.isLoading = true;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(updateUserAddressSlide.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateUserAddressSlide.fulfilled, (state, action) => {
+        state.isSuccess = true;
+        state.isError = false;
+        toast.success("User Address updated successfully");
+      })
+      .addCase(updateUserAddressSlide.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload);
+      });
   },
 });
 
