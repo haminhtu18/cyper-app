@@ -12,6 +12,7 @@ const initialState = {
   isLoading: true,
   isError: false,
   name: name ? name : "",
+  address: {},
   user: {
     email: "",
     name: "",
@@ -22,6 +23,23 @@ const initialState = {
     addresses: [],
   },
 };
+// export const addUserAddressSlide = createAsyncThunk(
+//   "user/addUserAddress",
+//   async (formData, thunkAPI) => {
+//     try {
+//       return await addUserAddress(formData);
+//     } catch (error) {
+//       const message =
+//         (error.response &&
+//           error.response.data &&
+//           error.response.data.message) ||
+//         error.message ||
+//         error.toString();
+//       console.log(message);
+//       return thunkAPI.rejectWithValue(message);
+//     }
+//   }
+// );
 
 export const updateUserAddressSlide = createAsyncThunk(
   "user/updateUserAddress",
@@ -87,6 +105,20 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      // .addCase(addUserAddressSlide.pending, (state) => {
+      //   state.isLoading = true;
+      // })
+      // .addCase(addUserAddressSlide.fulfilled, (state, action) => {
+      //   state.isSuccess = true;
+      //   state.isError = false;
+      //   toast.success("User Address added successfully");
+      // })
+      // .addCase(addUserAddressSlide.rejected, (state, action) => {
+      //   state.isLoading = false;
+      //   state.isError = true;
+      //   state.message = action.payload;
+      //   toast.error(action.payload);
+      // })
       .addCase(updateUserAddressSlide.pending, (state) => {
         state.isLoading = true;
       })
@@ -94,6 +126,8 @@ const authSlice = createSlice({
         state.isSuccess = true;
         state.isError = false;
         toast.success("User Address updated successfully");
+        console.log(action.payload);
+        state.address = action.payload;
       })
       .addCase(updateUserAddressSlide.rejected, (state, action) => {
         state.isLoading = false;

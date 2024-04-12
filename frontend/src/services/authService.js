@@ -62,6 +62,22 @@ const getLoginStatus = async () => {
   }
 };
 
+//add User Address
+const addProfileUser = async (formData) => {
+  try {
+    const response = await axios.put(
+      `${BACKEND_URL}/api/users/add-user-address`,
+      formData,
+      {
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 // update Profile User
 const updateProfileUser = async (formData) => {
   try {
@@ -81,7 +97,7 @@ const updateProfileUser = async (formData) => {
 // update User Address
 const updateUserAddress = async (formData) => {
   try {
-    const response = await axios.put(
+    const response = await axios.post(
       `${BACKEND_URL}/api/users/update-user-address`,
       formData,
       {
@@ -105,9 +121,7 @@ const deleteUserAddress = async (id) => {
     );
     return response.data;
   } catch (error) {
-    console.log("====================================");
     console.log(error.message);
-    console.log("====================================");
   }
 };
 
@@ -142,4 +156,5 @@ export {
   updateProfileUser,
   updateUserAddress,
   deleteUserAddress,
+  addProfileUser,
 };

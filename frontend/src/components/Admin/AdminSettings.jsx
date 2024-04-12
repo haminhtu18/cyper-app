@@ -47,12 +47,7 @@ const AdminSettings = () => {
         </div>
       </div>
       <div className="mx-5">
-        {active === 1 && (
-          <div className="xl:grid-cols-4 lg:grid-cols-3  grid gap-10">
-            {productData &&
-              productData.map((i, index) => <ProductItem {...i} key={index} />)}
-          </div>
-        )}
+        {active === 1 && "1"}
         {active === 2 && "2"}
         {active === 3 && "3"}
       </div>

@@ -63,14 +63,7 @@ function App() {
             </UserProtectedRoute>
           }
         />
-        <Route
-          path="/admin/*"
-          element={
-            <AdminProtectdRoute name={name} isLoggedIn={isLoggedIn}>
-              <Admin />
-            </AdminProtectdRoute>
-          }
-        />
+        <Route path="/admin/*" element={<Admin />} />
       </Routes>
     </BrowserRouter>
   );

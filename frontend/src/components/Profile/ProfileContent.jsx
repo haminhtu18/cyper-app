@@ -522,7 +522,7 @@ const Address = () => {
                       </option>
                       {State &&
                         State.getStatesOfCountry(country).map((item) => (
-                          <option value={item.name} key={item}>
+                          <option value={item.isoCode} key={item.isoCode}>
                             {item.name}
                           </option>
                         ))}
@@ -563,6 +563,7 @@ const Address = () => {
                       type="submit"
                       required
                       readOnly
+                      placeholder="Add"
                       className="w-[95%] text-center cursor-pointer mt-5 border p-1"
                     />
                   </div>
@@ -583,7 +584,7 @@ const Address = () => {
       </div>
       <br />
       {user &&
-        user.addresses?.map((address, index) => (
+        user.addresses.map((address, index) => (
           <div
             key={index}
             className="w-full h-[70px] rounded-[4px] flex items-center px-3 shadow justify-between pr-10 mb-6"

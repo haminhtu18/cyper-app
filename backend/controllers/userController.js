@@ -219,6 +219,31 @@ const updateUser = asyncHandler(async (req, res) => {
   }
 });
 
+//Add Address User
+const adddAddressUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+  const newAddress = req.body;
+  console.log(req.body);
+  const sameTypeAddress = user.addresses.find(
+    (address) => address.addressType === req.body.addressType
+  );
+  if (sameTypeAddress) {
+    res.status(400);
+    throw new Error("Address none found");
+  }
+  const existAddress = user.addresses.find(
+    (address) => address._id === req.body._id
+  );
+  if (existAddress) {
+    Object.assign(existAddress, req.body);
+  } else {
+    user.addresses.push(req.body);
+  }
+
+  await user.save();
+  res.status(200).json(user);
+});
+
 //Update Address User
 const updateAddressUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
@@ -237,6 +262,30 @@ const updateAddressUser = asyncHandler(async (req, res) => {
     Object.assign(existAddress, req.body);
   } else {
     user.addresses.push(req.body);
+  }
+
+  await user.save();
+  res.status(200).json(user);
+});
+
+//Delete Address User
+const deleteAddressUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+  console.log(req.body);
+  const sameTypeAddress = user.addresses.find(
+    (address) => address.addressType === req.body.addressType
+  );
+  if (sameTypeAddress) {
+    res.status(400);
+    throw new Error("Address none found");
+  }
+  const existAddress = user.addresses.find(
+    (address) => address._id === req.body._id
+  );
+  if (existAddress) {
+    Object.assign(existAddress, req.body);
+  } else {
+    user.addresses.slice(req.body);
   }
 
   await user.save();
@@ -370,7 +419,9 @@ module.exports = {
   getUser,
   loginStatus,
   updateUser,
+  adddAddressUser,
   updateAddressUser,
+  deleteAddressUser,
   changePassword,
   forgotPassword,
   resetPassword,
